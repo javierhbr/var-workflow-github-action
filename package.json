@@ -1,6 +1,6 @@
 {
   "name": "typescript-helloworld",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "This is an example project for the &lt;URL> article to set up Visual Studio code with TypeScript.",
   "main": "out/index.js",
   "scripts": {
