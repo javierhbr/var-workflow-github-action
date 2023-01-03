@@ -77,9 +77,7 @@ jobs:
         run: echo "${{ needs.bump-version.outputs.dockerTag }}"
 
       - name: Determine version
-        run: |
-          FULL_DOCKER_TAG_PUBLISH=${{ steps.version-bump.outputs.newTag }} ${{ github.ref }}
-          echo "FULL_DOCKER_TAG_PUBLISH=FULL_DOCKER_TAG_PUBLISH" >> $GITHUB_ENV
+        run: echo "FULL_DOCKER_TAG_PUBLISH=${{ steps.version-bump.outputs.newTag }} ${{ github.ref }}" >> $GITHUB_ENV
         env:
           FULL_DOCKER_TAG_PUBLISH: ${{ env.FULL_DOCKER_TAG_PUBLISH }}
 
