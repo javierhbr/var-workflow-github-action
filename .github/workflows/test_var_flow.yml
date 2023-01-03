@@ -1,3 +1,15 @@
+# Run whenever a push/merge is done
+# to the develop branch
+name: Deploy develop merge/push
+on:
+  push:
+    branches:
+      - main
+
+env:
+  DOCKER_TAG: '0.0'
+  ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
+
 jobs:
   job1:
     runs-on: ubuntu-latest
