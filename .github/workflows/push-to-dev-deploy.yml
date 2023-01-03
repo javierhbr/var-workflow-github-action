@@ -37,8 +37,8 @@ jobs:
     needs: code-validations
     runs-on: ubuntu-latest
     outputs:
-      newTag: ${{ steps.check_docker_tag.outputs.newTag}}
-      dockerTag: ${{ steps.check_docker_tag.outputs.DOCKER_TAG}}
+      dockerTag: ${{ steps.new_docker_tag_env.outputs.dockerTag}}
+      newTag: ${{ steps.new_tag_env.outputs.newTag}}
     steps:
       - name: 'Checkout source code'
         uses: actions/checkout@v3
@@ -61,11 +61,9 @@ jobs:
         env:
           NEW_TAG: ${{ steps.version-bump.outputs.newTag }}
         run: echo "new tag $NEW_TAG"
-      - name: Change DOCKER_TAG env
-#        run: echo "::set-env name=DOCKER_TAG::${{ steps.version-bump.outputs.newTag }}"
+      - id: new_docker_tag_env
         run: echo "dockerTag=${{ steps.version-bump.outputs.newTag }}" >> $GITHUB_OUTPUT
-      - id: check_docker_tag
-#        run: echo "::set-output name=newTag::${{ env.DOCKER_TAG }}"
+      - id: new_tag_env
         run: echo "newTag=${{ env.DOCKER_TAG }}" >> $GITHUB_OUTPUT
 
 
