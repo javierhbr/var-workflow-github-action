@@ -64,7 +64,7 @@ jobs:
       - id: new_docker_tag_env
         run: echo "dockerTag=${{ steps.version-bump.outputs.newTag }}" >> $GITHUB_OUTPUT
       - id: new_tag_env
-        run: echo "newTag=${{ env.DOCKER_TAG }}" >> $GITHUB_OUTPUT
+        run: echo "newTag=${{ env.NEW_TAG }}" >> $GITHUB_OUTPUT
 
 
   deploy:
