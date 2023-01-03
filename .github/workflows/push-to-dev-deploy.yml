@@ -63,8 +63,6 @@ jobs:
         run: echo "new tag $NEW_TAG"
       - id: new_docker_tag_env
         run: echo "dockerTag=${{ steps.version-bump.outputs.newTag }}" >> $GITHUB_OUTPUT
-      - id: new_tag_env
-        run: echo "newTag=${{ env.NEW_TAG }}" >> $GITHUB_OUTPUT
 
 
   deploy:
@@ -75,9 +73,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: check newTag env
-        run: echo "${{ needs.bump-version.outputs.newTag }}"
-
       - name: check dockerTag env
         run: echo "${{ needs.bump-version.outputs.dockerTag }}"
 
+      - name: Determine version
+        run: |
+          FULL_DOCKER_TAG_PUBLISH=${{ steps.version-bump.outputs.newTag }}
+          echo "FULL_DOCKER_TAG_PUBLISH=FULL_DOCKER_TAG_PUBLISH" >> $GITHUB_ENV
+        env:
+          FULL_DOCKER_TAG_PUBLISH: ${{ env.FULL_DOCKER_TAG_PUBLISH }}
+
+      - name: check FULL_DOCKER_TAG_PUBLISH env
+        run: echo "${{ env.FULL_DOCKER_TAG_PUBLISH }}"
